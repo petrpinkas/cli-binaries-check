@@ -21,7 +21,7 @@ jobs:
           key: clients-${{ env.DOCKER_IMAGE_VERSION }}
           enableCrossOsArchive: true
       - name: Get image with CLI runtimes
-        if: steps.cache-clients.outputs.cache-hit == false
+        if: steps.cache-clients.outputs.cache-hit == 'false'
         shell: bash
         run: |
           mkdir target
@@ -36,15 +36,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Cache clients
-        id: cache-clients
+      - name: Restore clients
+        id: restore-clients
         uses: actions/cache@v3
         with:
           path: ./target/clients
           key: clients-${{ env.DOCKER_IMAGE_VERSION }}
           enableCrossOsArchive: true
       - name: List binaries
-        if: steps.cache-clients.outputs.cache-hit == true
+        if: steps.restore-clients.outputs.cache-hit == 'true'
         shell: bash
         run: |
           ls -la ./target/clients
