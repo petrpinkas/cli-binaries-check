@@ -12,8 +12,6 @@ jobs:
       - name: Get image with CLI runtimes
         shell: bash
         run: |
-          docker -v          
-          docker cp $(docker create --name client-server-con quay.io/redhat-user-workloads/rhtas-tenant/rhtas-stack-1-0-beta/client-server:on-pr-d6800cce4b23319b33fd86e577285319c2e709ae):/var/www/html/clients . && docker rm client-server-con
-          ls -l
-          find clients
-          
+          mkdir target
+          docker cp $(docker create --name client-server-con quay.io/redhat-user-workloads/rhtas-tenant/rhtas-stack-1-0-beta/client-server:on-pr-d6800cce4b23319b33fd86e577285319c2e709ae):/var/www/html/clients target && docker rm client-server-con
+          find target
