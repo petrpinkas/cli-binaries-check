@@ -41,10 +41,9 @@ jobs:
         with:
           path: ./target/clients
           key: clients-${{ env.DOCKER_IMAGE_VERSION }}
-      name: List binaries
-      if: steps.cache-clients.outputs.cache-hit != 'true'
-      shell: bash
-      run: |
-        ls -la ./target/clients
-        find ./target/clients
-        
+      - name: List binaries
+        if: steps.cache-clients.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          ls -la ./target/clients
+          find ./target/clients
