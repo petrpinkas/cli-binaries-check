@@ -1,4 +1,4 @@
-name: test-binaries
+name: cli-binaries-test
 on:
   workflow_dispatch:
 
@@ -7,7 +7,7 @@ env:
   DOCKER_IMAGE_VERSION: on-pr-d6800cce4b23319b33fd86e577285319c2e709ae
 
 jobs:
-  get-binaries:
+  get-cli-binaries:
     name: Get client binaries
     runs-on: ubuntu-latest
 
@@ -27,8 +27,9 @@ jobs:
           mkdir target
           docker cp $(docker create --name client-server-con $DOCKER_IMAGE:$DOCKER_IMAGE_VERSION):/var/www/html/clients target && docker rm client-server-con
 
-  test-runtimes:
+  test-cli-binaries:
     name: Test client binaries
+    needs: get-cli-binaries
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
