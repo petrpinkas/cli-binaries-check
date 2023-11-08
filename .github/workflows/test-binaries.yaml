@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./target/clients
-          key: clients-$DOCKER_IMAGE_VERSION
+          key: clients-${{ env.DOCKER_IMAGE_VERSION }}
       - name: Get image with CLI runtimes
         if: steps.cache-clients.outputs.cache-hit != 'true'
         shell: bash
