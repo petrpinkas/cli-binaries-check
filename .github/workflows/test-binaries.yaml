@@ -1,0 +1,20 @@
+name: test-binaries
+on:
+  workflow-dispatch:
+
+jobs:
+  test-binary:
+    name: Test binaries
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout
+      
+      - name: Echo HI
+        shell: bash
+        run: |
+          echo "HI"
+          
