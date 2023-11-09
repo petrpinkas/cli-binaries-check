@@ -55,12 +55,12 @@ jobs:
           key: clients-${{ env.DOCKER_IMAGE_VERSION }}-1
           enableCrossOsArchive: true
           fail-on-cache-miss: true
-      # - name: Check cache
-      #   if: ${{ steps.restore-clients.outputs.cache-hit != 'true' }}
-      #   shell: bash
-      #   run: |
-      #     echo "Cache with cli binaries not found"
-      #     exit 1
+      - name: Check cache
+        if: ${{ steps.restore-clients.outputs.cache-hit != 'true' }}
+        shell: bash
+        run: |
+          echo "Cache with cli binaries not found"
+          exit 1
       - name: List binaries
         if: ${{ steps.restore-clients.outputs.cache-hit == 'true' }}
         shell: bash
