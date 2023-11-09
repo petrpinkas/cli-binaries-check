@@ -13,14 +13,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Cache clients
+      - name: Enable cache with CLI binaries
         id: cache-clients
         uses: actions/cache@v3
         with:
           path: ./target/clients
           key: clients-${{ env.DOCKER_IMAGE_VERSION }}
           enableCrossOsArchive: true
-      - name: Get image with CLI runtimes
+      - name: Prepare CLI binaries if not cached already
         if: ${{ steps.cache-clients.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Restore clients
+      - name: Restore cache with CLI binaries
         id: restore-clients
         uses: actions/cache@v3
         with:
@@ -55,13 +55,13 @@ jobs:
           key: clients-${{ env.DOCKER_IMAGE_VERSION }}
           enableCrossOsArchive: true
           fail-on-cache-miss: true
-      - name: Check cache
+      - name: Cache not available error
         if: ${{ steps.restore-clients.outputs.cache-hit != 'true' }}
         shell: bash
         run: |
           echo "Cache with cli binaries not found"
           exit 1
-      - name: List binaries
+      - name: List cli binaries
         if: ${{ steps.restore-clients.outputs.cache-hit == 'true' }}
         shell: bash
         run: |
