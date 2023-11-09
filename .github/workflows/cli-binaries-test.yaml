@@ -39,9 +39,9 @@ jobs:
   test-cli-binaries:
     name: Test client binaries
     needs: get-cli-binaries
-    fail-fast: false
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
