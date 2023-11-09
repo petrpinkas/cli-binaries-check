@@ -26,6 +26,15 @@ jobs:
         run: |
           mkdir target
           docker cp $(docker create --name client-server-con $DOCKER_IMAGE:$DOCKER_IMAGE_VERSION):/var/www/html/clients target && docker rm client-server-con
+          gunzip ./target/clients/darwin/rekor-cli.gz
+          gunzip ./target/clients/darwin/cosign.gz
+          gunzip ./target/clients/darwin/gitsign.gz
+          gunzip ./target/clients/windows/rekor-cli.gz
+          gunzip ./target/clients/windows/cosign.gz
+          gunzip ./target/clients/windows/gitsign.gz
+          gunzip ./target/clients/linux/rekor-cli.gz
+          gunzip ./target/clients/linux/cosign.gz
+          gunzip ./target/clients/linux/gitsign.gz
 
   test-cli-binaries:
     name: Test client binaries
