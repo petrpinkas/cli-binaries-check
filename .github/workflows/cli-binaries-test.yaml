@@ -51,8 +51,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./target/clients
-          key: clients-${{ env.DOCKER_IMAGE_VERSION }}
+          key: clients-${{ env.DOCKER_IMAGE_VERSION }}-1
           enableCrossOsArchive: true
+          fail-on-cache-miss: true
       - name: List binaries
         if: ${{ steps.restore-clients.outputs.cache-hit == 'true' }}
         shell: bash
