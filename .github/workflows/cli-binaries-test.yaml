@@ -39,7 +39,7 @@ jobs:
   test-cli-binaries:
     name: Test client binaries
     needs: get-cli-binaries
-    continue-on-error: true
+    fail-fast: false
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
